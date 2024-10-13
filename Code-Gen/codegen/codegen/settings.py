@@ -50,6 +50,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_COOKIE_SECURE = False  # Set to True in production if using HTTPS
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']  # Add your domain
+
+
 ROOT_URLCONF = 'codegen.urls'
 
 TEMPLATES = [
