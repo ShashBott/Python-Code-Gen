@@ -47,7 +47,7 @@ def generate_code(request):
         prompt = data.get('prompt', '')
 
         # Generate code from the prompt using the loaded model
-        generated_code = pipe(prompt, max_length=200, do_sample=True, top_k=50, truncation=True)[0]['generated_text']
+        generated_code = pipe(prompt, max_length=500, do_sample=True, top_k=50, truncation=True)[0]['generated_text']
 
         return JsonResponse({'generated_code': generated_code})
     return JsonResponse({'error': 'Invalid request'}, status=400)
