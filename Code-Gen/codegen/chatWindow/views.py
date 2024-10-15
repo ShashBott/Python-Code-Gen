@@ -16,7 +16,13 @@ import os
 #salesforce model
 #pipe = pipeline("text-generation", model="Salesforce/codegen-16B-mono")
 
-#EleutherAI model
+
+# Salesforce CodeGen-6B-mono model (activated)
+# tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-6B-mono")
+# model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-6B-mono")
+# pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
+
+# EleutherAI model
 tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-1.3B")
 model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-1.3B")
 pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
@@ -33,6 +39,23 @@ def index(request):
 #         prompt = data.get('prompt', '')
 
 #         # Generate code from the prompt using the loaded model
+#         generated_code = pipe(prompt, max_length=200, do_sample=True)[0]['generated_text']
+
+#         return JsonResponse({'generated_code': generated_code})
+#     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+# #Lazy loading of the model
+# def generate_code(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         prompt = data.get('prompt', '')
+
+#         # Load model when needed
+#         tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-6B-mono")
+#         model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-6B-mono")
+#         pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
+
 #         generated_code = pipe(prompt, max_length=200, do_sample=True)[0]['generated_text']
 
 #         return JsonResponse({'generated_code': generated_code})
