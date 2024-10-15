@@ -22,11 +22,15 @@ import os
 # model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-6B-mono")
 # pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-# EleutherAI model
-tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-1.3B")
-model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-1.3B")
-pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
+# # EleutherAI model
+# tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-1.3B")
+# model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-1.3B")
+# pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
+# Load the Salesforce CodeGen-2B-mono model directly
+tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-2B-mono")
+model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-2B-mono")
+pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
 def index(request):
     return render(request, 'chatWindow/index.html')
@@ -63,7 +67,7 @@ def index(request):
 
 
 #comment the bellow code if you are not using EleutherAI model
-# code for using EleutherAI model
+# code for using EleutherAI model and salesforce 2b model
 def generate_code(request):
     if request.method == 'POST':
         data = json.loads(request.body)
